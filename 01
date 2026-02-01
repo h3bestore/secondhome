@@ -1,321 +1,533 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  MessageCircle, 
-  MapPin, 
-  Waves, 
-  Mic2, 
-  Gamepad2, 
-  Utensils, 
-  Coffee, 
-  ChevronRight, 
-  ShieldCheck, 
-  Menu, 
-  X,
-  CreditCard
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lestari Villa Puncak | Mewah & Dekat Taman Safari</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            overflow-x: hidden;
+        }
 
-const App = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+        /* RTL Styles for Arabic */
+        body.rtl {
+            text-align: right;
+            font-family: 'Cairo', sans-serif;
+        }
 
-  const data = {
-    company_info: {
-      name: "Lestari Villa Puncak",
-      location: "Bogor, Jawa Barat",
-      contact: {
-        whatsapp: "+628888700154",
-        whatsapp_link: "https://wa.me/628888700154"
-      }
-    },
-    hero_section: {
-      badge: "Premium Villa Rental Bogor",
-      headline: "Experience Serenity at Lestari Villa Puncak",
-      subheadline: "Your second home in Bogor. Managed professionally, designed for comfort. Escape the city and embrace the mountain breeze.",
-      background_image: "https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=2070&auto=format&fit=crop",
-      cta_primary: "Book via WhatsApp",
-      cta_secondary: "View Villas"
-    },
-    villas: [
-      {
-        id: "villa-vanilla",
-        name: "Villa Vanilla",
-        tagline: "Modern & Bright",
-        description: "A minimalist sanctuary with wide open spaces and pure white aesthetics.",
-        image_url: "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070&auto=format&fit=crop",
-        features: ["Private Pool", "Billiard Table", "Karaoke System"]
-      },
-      {
-        id: "villa-caramello",
-        name: "Villa Caramello",
-        tagline: "Warm & Woody",
-        description: "Cozy wooden interiors designed for intimate family gatherings and warmth.",
-        image_url: "https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=2070&auto=format&fit=crop",
-        features: ["Private Pool", "Billiard Table", "Karaoke System"]
-      }
-    ],
-    exclusive_services: [
-      {
-        id: "service-bbq",
-        title: "Barbeque Party Package",
-        description: "Enjoy a hassle-free BBQ night. We provide the grill, premium meats, fresh vegetables, and special sauces.",
-        icon: <Utensils className="w-6 h-6" />
-      },
-      {
-        id: "service-pool-tray",
-        title: "Pool Tray & Floating Breakfast",
-        description: "Start your day with an aesthetic floating breakfast in your private pool. Perfect for Instagram-worthy moments.",
-        icon: <Coffee className="w-6 h-6" />
-      }
-    ]
-  };
+        body.rtl nav,
+        body.rtl section,
+        body.rtl footer {
+            direction: rtl;
+        }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+        body.rtl .flex {
+            flex-direction: row-reverse;
+        }
 
-  const FeatureIcon = ({ name }) => {
-    if (name.includes('Pool')) return <Waves className="w-4 h-4" />;
-    if (name.includes('Billiard')) return <Gamepad2 className="w-4 h-4" />;
-    if (name.includes('Karaoke')) return <Mic2 className="w-4 h-4" />;
-    return null;
-  };
+        body.rtl .ml-auto {
+            margin-right: auto;
+            margin-left: 0;
+        }
 
-  return (
-    <div className="min-h-screen bg-neutral-50 font-sans text-neutral-900">
-      {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className={`font-bold text-xl tracking-tight ${scrolled ? 'text-emerald-800' : 'text-white'}`}>
-            LESTARI VILLA
-          </div>
-          
-          <div className="hidden md:flex space-x-8 items-center">
-            {['Villas', 'Services', 'Booking', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className={`text-sm font-medium transition-colors ${scrolled ? 'text-neutral-600 hover:text-emerald-600' : 'text-white/80 hover:text-white'}`}>
-                {item}
-              </a>
-            ))}
-            <a href={data.company_info.contact.whatsapp_link} target="_blank" className="bg-emerald-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-emerald-700 transition-all">
-              Book Now
-            </a>
-          </div>
+        body.rtl .mr-2 {
+            margin-left: 0.5rem;
+            margin-right: 0;
+        }
 
-          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className={scrolled ? 'text-neutral-900' : 'text-white'} /> : <Menu className={scrolled ? 'text-neutral-900' : 'text-white'} />}
-          </button>
-        </div>
-      </nav>
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://i.imgur.com/ELLB8NO.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-      {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={data.hero_section.background_image} alt="Hero" className="w-full h-full object-cover scale-105 animate-subtle-zoom" />
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
+        .logo-img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
         
-        <div className="relative max-w-7xl mx-auto px-6 w-full pt-20">
-          <div className="max-w-2xl text-white">
-            <span className="inline-block px-4 py-1.5 bg-emerald-600/90 rounded-full text-xs font-bold tracking-widest uppercase mb-6 animate-fade-in">
-              {data.hero_section.badge}
+        .logo-img:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-icon {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-custom 2s infinite;
+        }
+
+        @keyframes bounce-custom {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .stats-overlap {
+            margin-top: -4rem; 
+        }
+        @media (max-width: 768px) {
+            .stats-overlap {
+                margin-top: 2rem; 
+            }
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 1.5rem;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        #galleryModal {
+            display: none;
+            z-index: 9999;
+        }
+        .gallery-active {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navigasi -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 animate__animated animate__fadeInLeft">
+                <img src="https://i.imgur.com/P6Wqb1u.jpeg" alt="Lestari Villa Logo" class="logo-img rounded-lg">
+                <div class="hidden sm:block">
+                    <h1 class="text-lg font-extrabold tracking-tight text-green-900 leading-none text-left">LESTARI</h1>
+                    <span class="text-xs font-bold text-green-600 tracking-[0.2em] block">VILLA PUNCAK</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex space-x-8 font-medium text-slate-600 animate__animated animate__fadeInDown">
+                <a href="#" class="hover:text-green-600 transition" data-id="Beranda" data-ar="الصفحة الرئيسية">Beranda</a>
+                <a href="#fasilitas" class="hover:text-green-600 transition" data-id="Fasilitas" data-ar="المرافق">Fasilitas</a>
+                <a href="#unit" class="hover:text-green-600 transition" data-id="Unit Villa" data-ar="الوحدات">Unit Villa</a>
+                <a href="#booking" class="hover:text-green-600 transition" data-id="Booking" data-ar="الحجز">Booking</a>
+                <a href="https://instagram.com/lestari.villapuncak" target="_blank" class="hover:text-pink-600 transition flex items-center">
+                    <i class="fab fa-instagram mr-1 text-pink-500"></i> @lestari.villapuncak
+                </a>
+            </div>
+
+            <div class="flex items-center gap-4 animate__animated animate__fadeInRight">
+                <div class="flex items-center gap-3 text-sm font-bold border-r pr-4 border-slate-200">
+                    <button onclick="setLanguage('id')" class="hover:text-green-600 transition">ID</button>
+                    <span class="text-slate-300">|</span>
+                    <button onclick="setLanguage('ar')" class="hover:text-green-600 transition">عربي</button>
+                </div>
+                <a href="https://wa.me/628888700154" class="bg-green-600 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-green-700 transition-all hover:shadow-lg active:scale-95 text-sm">
+                    <i class="fab fa-whatsapp mr-1"></i> 08888700154
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg min-h-[85vh] flex items-center justify-center text-center text-white px-4">
+        <div class="max-w-4xl py-20">
+            <span class="inline-block bg-green-600/30 backdrop-blur-sm border border-green-400/30 text-green-100 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 animate-bounce-slow">
+                ✨ <span data-id="Hanya 6 Menit ke Taman Safari Bogor" data-ar="فقط 6 دقائق إلى تامان سفاري بوجور">Hanya 6 Menit ke Taman Safari Bogor</span>
             </span>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-              {data.hero_section.headline}
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed font-light">
-              {data.hero_section.subheadline}
+            <h2 
+                class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate__animated animate__zoomIn"
+                data-id="Momen Staycation Tak Terlupakan"
+                data-ar="لحظات إقامة لا تُنسى">
+                Momen Staycation Tak Terlupakan
+            </h2>
+            <p 
+                class="text-lg md:text-xl mb-10 text-slate-100 max-w-2xl mx-auto font-light animate__animated animate__fadeInUp animate__delay-1s"
+                data-id="Nikmati udara sejuk pegunungan dengan fasilitas premium untuk keluarga Anda."
+                data-ar="استمتع بهواء الجبال المنعش مع مرافق فاخرة مخصصة للعائلة.">
+                Nikmati udara sejuk pegunungan dengan fasilitas premium untuk keluarga Anda.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href={data.company_info.contact.whatsapp_link} className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg font-bold transition-all transform hover:-translate-y-1">
-                <MessageCircle size={20} />
-                {data.hero_section.cta_primary}
-              </a>
-              <button className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-lg font-bold transition-all">
-                {data.hero_section.cta_secondary}
-              </button>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate__animated animate__fadeInUp animate__delay-1s pb-10">
+                <a href="#booking" 
+                   class="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-bold py-4 px-10 rounded-xl text-lg transition-all shadow-xl hover:-translate-y-1 active:scale-95"
+                   data-id="Cek Ketersediaan"
+                   data-ar="تحقق من التوفر">
+                    Cek Ketersediaan
+                </a>
+                <a href="#unit" 
+                   class="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white font-bold py-4 px-10 rounded-xl text-lg transition-all active:scale-95"
+                   data-id="Lihat Unit Villa"
+                   data-ar="مشاهدة الوحدات">
+                    Lihat Unit Villa
+                </a>
             </div>
-          </div>
         </div>
-      </section>
+    </header>
 
-      {/* Stats/Info Bar */}
-      <div className="bg-white py-8 border-b">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-emerald-50 rounded-full text-emerald-600">
-              <MapPin size={24} />
+    <!-- Stats -->
+    <section class="stats-overlap relative z-10 container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white p-6 rounded-2xl shadow-xl text-center border border-slate-100 reveal">
+                <div class="text-3xl font-bold text-green-600 mb-1" data-id="6 Menit" data-ar="6 دقائق">6 Menit</div>
+                <div class="text-xs text-slate-500 uppercase tracking-widest font-bold" data-id="Ke Taman Safari" data-ar="إلى سفاري">Ke Taman Safari</div>
             </div>
-            <div>
-              <p className="text-xs text-neutral-500 uppercase font-bold tracking-wider">Location</p>
-              <p className="font-semibold">{data.company_info.location}</p>
+            <div class="bg-white p-6 rounded-2xl shadow-xl text-center border border-slate-100 reveal" style="transition-delay: 0.1s;">
+                <div class="text-3xl font-bold text-green-600 mb-1" data-id="100%" data-ar="100%">100%</div>
+                <div class="text-xs text-slate-500 uppercase tracking-widest font-bold" data-id="Privasi Terjamin" data-ar="خصوصية مضمونة">Privasi Terjamin</div>
             </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-emerald-50 rounded-full text-emerald-600">
-              <ShieldCheck size={24} />
+            <div class="bg-white p-6 rounded-2xl shadow-xl text-center border border-slate-100 reveal" style="transition-delay: 0.2s;">
+                <div class="text-3xl font-bold text-green-600 mb-1" data-id="24/7" data-ar="24/7">24/7</div>
+                <div class="text-xs text-slate-500 uppercase tracking-widest font-bold" data-id="Layanan Staff" data-ar="خدمة الموظفين">Layanan Staff</div>
             </div>
-            <div>
-              <p className="text-xs text-neutral-500 uppercase font-bold tracking-wider">Management</p>
-              <p className="font-semibold">Professional & Secure</p>
+            <div class="bg-white p-6 rounded-2xl shadow-xl text-center border border-slate-100 reveal" style="transition-delay: 0.3s;">
+                <div class="text-3xl font-bold text-green-600 mb-1" data-id="4.9/5" data-ar="4.9/5">4.9/5</div>
+                <div class="text-xs text-slate-500 uppercase tracking-widest font-bold" data-id="Rating" data-ar="تقييم">Rating</div>
             </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-emerald-50 rounded-full text-emerald-600">
-              <MessageCircle size={24} />
-            </div>
-            <div>
-              <p className="text-xs text-neutral-500 uppercase font-bold tracking-wider">Support</p>
-              <p className="font-semibold">24/7 WhatsApp Admin</p>
-            </div>
-          </div>
         </div>
-      </div>
+    </section>
 
-      {/* Villa Section */}
-      <section id="villas" className="py-24 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Curated Villas</h2>
-          <p className="text-neutral-500 max-w-xl mx-auto">Choose from our selection of premium villas, each with its own unique character and premium amenities.</p>
+    <!-- Fasilitas -->
+    <section id="fasilitas" class="py-24 container mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+            <h3 class="text-lg font-bold text-green-600 uppercase tracking-widest mb-3" data-id="Fasilitas Unggulan" data-ar="المرافق المتميزة">Fasilitas Unggulan</h3>
+            <h4 class="text-4xl md:text-5xl font-bold text-slate-900 leading-tight" data-id="Kenyamanan Prioritas Kami" data-ar="راحتكم أولويتنا">Kenyamanan Prioritas Kami</h4>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {data.villas.map((villa) => (
-            <div key={villa.id} className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-2xl aspect-[16/10] mb-6">
-                <img src={villa.image_url} alt={villa.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-bold text-emerald-800">
-                  {villa.tagline}
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 card-hover reveal">
+                <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors">
+                    <i class="fas fa-swimmer text-3xl text-green-600 group-hover:text-white floating-icon"></i>
                 </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-2 group-hover:text-emerald-700 transition-colors">{villa.name}</h3>
-              <p className="text-neutral-600 mb-6 line-clamp-2">{villa.description}</p>
-              
-              <div className="flex flex-wrap gap-4 mb-8">
-                {villa.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-sm text-neutral-500 bg-neutral-100 px-3 py-1 rounded-md">
-                    <FeatureIcon name={feature} />
-                    {feature}
-                  </div>
-                ))}
-              </div>
-              
-              <button className="w-full flex items-center justify-center gap-2 py-4 border-2 border-neutral-200 rounded-xl font-bold group-hover:bg-neutral-900 group-hover:text-white group-hover:border-neutral-900 transition-all">
-                View Details
-                <ChevronRight size={18} />
-              </button>
+                <h3 class="text-2xl font-bold mb-3" data-id="Private Pool" data-ar="مسبح خاص">Private Pool</h3>
+                <p class="text-slate-600 leading-relaxed text-sm" data-id="Kolam renang pribadi yang bersih dan terawat untuk keluarga." data-ar="حمام سباحة خاص نظيف ومعتنى به جيدًا للعائلة.">Kolam renang pribadi yang bersih dan terawat untuk keluarga.</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section id="services" className="py-24 bg-emerald-900 text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
-            <div className="lg:col-span-1">
-              <h2 className="text-4xl font-bold mb-6">Exclusive Services</h2>
-              <p className="text-emerald-100/80 mb-8 leading-relaxed">
-                Elevate your stay with our premium add-on services designed for the ultimate relaxation and entertainment.
-              </p>
-              <button className="flex items-center gap-2 text-white font-bold border-b-2 border-emerald-500 pb-1 hover:text-emerald-400 transition-colors">
-                Explore all services
-                <ChevronRight size={18} />
-              </button>
-            </div>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-              {data.exclusive_services.map((service) => (
-                <div key={service.id} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10">
-                  <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-                  <p className="text-emerald-50/70 text-sm leading-relaxed">
-                    {service.description}
-                  </p>
+            <div class="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 card-hover reveal" style="transition-delay: 0.2s;">
+                <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors">
+                    <i class="fas fa-microphone text-3xl text-green-600 group-hover:text-white floating-icon"></i>
                 </div>
-              ))}
+                <h3 class="text-2xl font-bold mb-3" data-id="Hiburan Lengkap" data-ar="ترفيه كامل">Hiburan Lengkap</h3>
+                <p class="text-slate-600 leading-relaxed text-sm" data-id="Tersedia meja Billiard standar dan set Karaoke berkualitas." data-ar="تتوفر طاولة بلياردو قياسية ومجموعة كاريوكي عالية الجودة.">Tersedia meja Billiard standar dan set Karaoke berkualitas.</p>
             </div>
-          </div>
+            <div class="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 card-hover reveal" style="transition-delay: 0.4s;">
+                <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-600 transition-colors">
+                    <i class="fas fa-cloud-sun text-3xl text-green-600 group-hover:text-white floating-icon"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3" data-id="View Pegunungan" data-ar="إطلالة على الجبل">View Pegunungan</h3>
+                <p class="text-slate-600 leading-relaxed text-sm" data-id="Pemandangan hijau Puncak yang menenangkan pikiran." data-ar="مناظر بونتشاك الخضراء التي تريح العقل.">Pemandangan hijau Puncak yang menenangkan pikiran.</p>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* Payment Information */}
-      <section className="py-24 max-w-5xl mx-auto px-6">
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-neutral-100">
-          <div className="bg-emerald-600 px-8 py-6 text-white flex items-center gap-3">
-            <ShieldCheck size={28} />
-            <h2 className="text-xl font-bold uppercase tracking-wider">Official Payment Notice</h2>
-          </div>
-          <div className="p-8 md:p-12 text-center">
-            <p className="text-neutral-600 mb-10 leading-relaxed text-lg max-w-2xl mx-auto">
-              To ensure your security, please transfer payments only to the official **Lestari Villa Puncak** account listed below.
-            </p>
-            
-            <div className="bg-neutral-50 rounded-2xl p-8 border-2 border-dashed border-neutral-200 inline-block w-full max-w-md">
-              <div className="flex items-center justify-center mb-4 text-emerald-600">
-                <CreditCard size={40} />
-              </div>
-              <p className="text-sm text-neutral-400 uppercase font-bold mb-1">Bank Account</p>
-              <p className="text-2xl font-black text-neutral-800 tracking-wider mb-4">1234 5678 90</p>
-              <div className="flex flex-col gap-1">
-                <p className="font-bold text-neutral-700">BANK BCA (Contoh)</p>
-                <p className="text-emerald-700 font-medium">a.n LESTARI VILLA PUNCAK</p>
-              </div>
+    <!-- Unit Section -->
+    <section id="unit" class="bg-slate-100 py-24">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
+                <div class="max-w-xl">
+                    <h3 class="text-lg font-bold text-green-600 uppercase tracking-widest mb-3" data-id="Pilihan Unit" data-ar="خيارات الوحدات">Pilihan Unit</h3>
+                    <h4 class="text-5xl font-bold text-slate-900 leading-tight" data-id="Temukan Ruang Istirahat Anda" data-ar="ابحث عن مساحة راحتك">Temukan Ruang Istirahat Anda</h4>
+                </div>
             </div>
             
-            <div className="mt-10 pt-10 border-t border-neutral-100 flex flex-col items-center">
-              <p className="text-neutral-500 mb-6 italic text-sm">Need help? Chat our official admin</p>
-              <a href={data.company_info.contact.whatsapp_link} className="flex items-center gap-3 text-emerald-700 font-bold text-lg hover:underline transition-all">
-                <MessageCircle fill="currentColor" size={24} className="text-emerald-600" />
-                {data.company_info.contact.whatsapp}
-              </a>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Villa Caramello -->
+                <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl group card-hover reveal">
+                    <div class="relative h-80 cursor-pointer overflow-hidden" onclick="openGallery('caramello')">
+                        <img src="https://i.imgur.com/ELLB8NO.jpeg" alt="Villa Caramello" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
+                             <span class="bg-white/20 backdrop-blur-md text-white px-6 py-2 rounded-full border border-white/50 font-bold" data-id="Lihat Foto" data-ar="مشاهدة الصور">Lihat Foto</span>
+                        </div>
+                    </div>
+                    <div class="p-10">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-4xl font-bold text-slate-900">Villa Caramello</h3>
+                            <button onclick="openGallery('caramello')" class="text-green-600 hover:text-green-700 font-bold text-sm uppercase flex items-center">
+                                <i class="fas fa-images mr-2"></i> Gallery
+                            </button>
+                        </div>
+                        <p class="text-green-600 font-semibold mb-4" data-id="Kapasitas: Up to 25 Orang" data-ar="السعة: hingga 25 orang">Kapasitas: Up to 25 Orang</p>
+                        <a href="#booking" class="block text-center bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition" data-id="Pesan Sekarang" data-ar="احجز الآن">Pesan Sekarang</a>
+                    </div>
+                </div>
+
+                <!-- Villa Vanilla -->
+                <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl group card-hover reveal" style="transition-delay: 0.2s;">
+                    <div class="relative h-80 cursor-pointer overflow-hidden" onclick="openGallery('vanilla')">
+                        <img src="https://i.imgur.com/ujC4sXB.jpeg" alt="Villa Vanilla" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
+                             <span class="bg-white/20 backdrop-blur-md text-white px-6 py-2 rounded-full border border-white/50 font-bold" data-id="Lihat Foto" data-ar="مشاهدة الصور">Lihat Foto</span>
+                        </div>
+                    </div>
+                    <div class="p-10">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-4xl font-bold text-slate-900">Villa Vanilla</h3>
+                            <button onclick="openGallery('vanilla')" class="text-green-600 hover:text-green-700 font-bold text-sm uppercase flex items-center">
+                                <i class="fas fa-images mr-2"></i> Gallery
+                            </button>
+                        </div>
+                        <p class="text-green-600 font-semibold mb-4" data-id="Kapasitas: Up to 20 Orang" data-ar="السعة: hingga 20 orang">Kapasitas: Up to 20 Orang</p>
+                        <a href="#booking" class="block text-center bg-green-600 text-white font-bold py-3 rounded-xl hover:bg-green-700 transition" data-id="Pesan Sekarang" data-ar="احجز الآن">Pesan Sekarang</a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Footer */}
-      <footer className="bg-neutral-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold mb-8 tracking-widest uppercase">Lestari Villa Puncak</h2>
-          <div className="flex flex-col items-center gap-2 mb-12">
-            <div className="flex items-center gap-2 text-neutral-400">
-              <MapPin size={16} />
-              {data.company_info.location}
+    <!-- Payment Information -->
+    <section class="py-16 container mx-auto px-6 reveal">
+        <div class="bg-white border-2 border-dashed border-green-200 rounded-[2rem] p-8 md:p-12 text-center max-w-3xl mx-auto shadow-sm">
+            <h3 class="text-2xl font-bold text-slate-900 mb-6" data-id="Informasi Reservasi Resmi" data-ar="معلومات الحجز الرسمية">Informasi Reservasi Resmi</h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-slate-50 p-6 rounded-2xl">
+                    <p class="text-slate-500 text-xs font-bold uppercase mb-2 tracking-widest" data-id="Rekening Bank" data-ar="حساب بنكي">Rekening Bank</p>
+                    <div class="flex items-center justify-center mb-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/c/c5/Bank_Syariah_Indonesia_logo.svg/1280px-Bank_Syariah_Indonesia_logo.svg.png" alt="BSI" class="h-6">
+                    </div>
+                    <p class="text-2xl font-bold text-green-900 tracking-wider">7206139247</p>
+                    <p class="text-slate-700 font-semibold mt-1">an. Mercylah Lestari</p>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl">
+                    <p class="text-slate-500 text-xs font-bold uppercase mb-2 tracking-widest" data-id="Kontak & Sosmed" data-ar="اتصل">Kontak & Sosmed</p>
+                    <a href="https://wa.me/628888700154" class="text-xl font-bold text-slate-800 flex items-center justify-center hover:text-green-600 transition mb-3">
+                        <i class="fab fa-whatsapp mr-2 text-green-600"></i> 08888700154
+                    </a>
+                    <a href="https://instagram.com/lestari.villapuncak" target="_blank" class="text-xl font-bold text-slate-800 flex items-center justify-center hover:text-pink-600 transition">
+                        <i class="fab fa-instagram mr-2 text-pink-600"></i> @lestari.villapuncak
+                    </a>
+                </div>
             </div>
-            <p className="text-neutral-500 text-sm">© 2024 Lestari Villa Puncak. All rights reserved.</p>
-          </div>
+            
+            <p class="mt-8 text-sm text-slate-500 italic" data-id="*Harap lakukan konfirmasi setelah transfer melalui WhatsApp." data-ar="*يرجى تأكيد الدفع عبر الواتساب بعد التحويل.">*Harap lakukan konfirmasi setelah transfer melalui WhatsApp.</p>
         </div>
-      </footer>
+    </section>
 
-      {/* Floating Action Button (Mobile) */}
-      <div className="fixed bottom-6 right-6 z-50 md:hidden">
-        <a href={data.company_info.contact.whatsapp_link} className="w-16 h-16 bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl animate-pulse">
-          <MessageCircle size={32} />
-        </a>
-      </div>
+    <!-- Booking Form -->
+    <section id="booking" class="py-24 bg-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto bg-green-900 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row reveal">
+                <div class="md:w-1/2 p-12 text-white">
+                    <h2 class="text-5xl font-bold mb-6" data-id="Siap Berlibur?" data-ar="هل أنت مستعد للعطلة؟">Siap Berlibur?</h2>
+                    <p class="text-green-100/80 mb-8" data-id="Hubungi kami untuk mendapatkan harga spesial." data-ar="اتصل بنا للحصول على سعر خاص.">Hubungi kami untuk mendapatkan harga spesial.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-green-400"></i>
+                            <span data-id="Konfirmasi Cepat" data-ar="تأكيد سريع">Konfirmasi Cepat</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-green-400"></i>
+                            <span data-id="Tanpa Biaya Admin" data-ar="لا توجد رسوم إدارية">Tanpa Biaya Admin</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 bg-white p-12">
+                    <form id="bookingForm" class="space-y-5">
+                        <input type="text" id="nama" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-green-500 transition-all" placeholder="Nama Lengkap / الاسم الكامل" required>
+                        <select id="villa" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-green-500 transition-all">
+                            <option value="Villa Caramello">Villa Caramello</option>
+                            <option value="Villa Vanilla">Villa Vanilla</option>
+                        </select>
+                        <input type="date" id="tanggal" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl outline-none focus:ring-2 focus:ring-green-500 transition-all" required>
+                        <button type="button" onclick="kirimWA()" class="w-full bg-green-600 text-white font-bold py-5 rounded-2xl flex items-center justify-center transition-transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-green-200">
+                            <i class="fab fa-whatsapp mr-3 text-2xl"></i> <span data-id="Cek via WhatsApp" data-ar="التحقق عبر الواتساب">Cek via WhatsApp</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes subtle-zoom {
-          0% { transform: scale(1.0); }
-          100% { transform: scale(1.1); }
-        }
-        .animate-subtle-zoom {
-          animation: subtle-zoom 20s ease-in-out infinite alternate;
-        }
-        .animate-fade-in {
-          animation: fadeIn 1s ease-out;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}} />
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="fixed inset-0 bg-black/95 items-center justify-center p-4">
+        <button onclick="closeGallery()" class="absolute top-6 right-6 text-white text-4xl hover:text-red-500 transition-colors z-[10001]">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="relative w-full max-w-5xl h-[80vh] flex items-center justify-center">
+            <button onclick="prevImage()" class="absolute left-0 text-white/50 hover:text-white text-5xl p-4 transition-all z-[10002]">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="nextImage()" class="absolute right-0 text-white/50 hover:text-white text-5xl p-4 transition-all z-[10002]">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="w-full h-full flex items-center justify-center">
+                <img id="galleryImg" src="" class="max-w-full max-h-full object-contain rounded-lg animate__animated animate__fadeIn">
+            </div>
+
+            <div id="galleryCounter" class="absolute bottom-[-40px] text-white font-bold tracking-widest bg-white/10 px-6 py-2 rounded-full">
+                1 / 7
+            </div>
+        </div>
     </div>
-  );
-};
 
-export default App;
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <div class="flex items-center space-x-3 mb-6 justify-center md:justify-start">
+                    <img src="https://i.imgur.com/P6Wqb1u.jpeg" alt="Lestari Villa" class="h-10 rounded-lg grayscale brightness-200">
+                    <h1 class="text-xl font-extrabold tracking-tight">LESTARI VILLA</h1>
+                </div>
+                <p class="text-slate-400 text-sm leading-relaxed" data-id="Destinasi staycation premium di Puncak dengan fasilitas lengkap dan pelayanan terbaik untuk keluarga." data-ar="وجهة إقامة متميزة في بونتشاك مع مرافق كاملة وأفضل خدمة للعائلة.">
+                    Destinasi staycation premium di Puncak dengan fasilitas lengkap dan pelayanan terbaik untuk keluarga.
+                </p>
+            </div>
+            <div class="flex flex-col items-center">
+                <h4 class="font-bold mb-6 text-green-500 uppercase tracking-widest text-sm" data-id="Hubungi Kami" data-ar="اتصل بنا">Hubungi Kami</h4>
+                <div class="space-y-4">
+                    <a href="https://wa.me/628888700154" class="flex items-center text-slate-400 hover:text-white transition">
+                        <i class="fab fa-whatsapp mr-3"></i> 08888700154
+                    </a>
+                    <a href="https://instagram.com/lestari.villapuncak" class="flex items-center text-slate-400 hover:text-white transition">
+                        <i class="fab fa-instagram mr-3"></i> @lestari.villapuncak
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 text-green-500 uppercase tracking-widest text-sm" data-id="Alamat" data-ar="العنوان">Lokasi</h4>
+                <p class="text-slate-400 text-sm">Cisarua, Puncak, Bogor (6 Menit ke Taman Safari)</p>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12 pt-8 border-t border-slate-800 text-center">
+            <p class="text-slate-500 text-xs">© 2024 Management Lestari Villa. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentGallery = [];
+        let currentIndex = 0;
+
+        const villaGalleries = {
+            caramello: [
+                'https://i.imgur.com/ELLB8NO.jpeg',
+                'https://i.imgur.com/ota3BAS.jpeg',
+                'https://i.imgur.com/YP0azpk.jpeg',
+                'https://i.imgur.com/OJpolEM.jpeg',
+                'https://i.imgur.com/ZeddnLC.jpeg',
+                'https://i.imgur.com/AwZ5G7r.jpeg',
+                'https://i.imgur.com/pK1t5BY.jpeg'
+            ],
+            vanilla: [
+                'https://i.imgur.com/ujC4sXB.jpeg',
+                'https://i.imgur.com/rL8mtFK.jpeg',
+                'https://i.imgur.com/AHyNLu4.jpeg',
+                'https://i.imgur.com/KBCWauW.jpeg',
+                'https://i.imgur.com/36xRLEd.jpeg',
+                'https://i.imgur.com/P1SUZtQ.jpeg',
+                'https://i.imgur.com/4xUJdLH.jpeg'
+            ]
+        };
+
+        function openGallery(villaKey) {
+            currentGallery = villaGalleries[villaKey];
+            currentIndex = 0;
+            updateGalleryUI();
+            document.getElementById('galleryModal').classList.add('gallery-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').classList.remove('gallery-active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateGalleryUI() {
+            const imgEl = document.getElementById('galleryImg');
+            const counterEl = document.getElementById('galleryCounter');
+            imgEl.src = currentGallery[currentIndex];
+            counterEl.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            updateGalleryUI();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateGalleryUI();
+        }
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-id]').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.innerText = text;
+            });
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+            }
+        }
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+
+        function kirimWA() {
+            const nama = document.getElementById('nama').value;
+            const villa = document.getElementById('villa').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const nomorWA = "628888700154";
+            if(!nama || !tanggal) {
+                alert("Mohon lengkapi data nama dan tanggal!");
+                return;
+            }
+            const pesan = `Halo Admin Lestari Villa,\nSaya ingin reservasi:\n\nNama: ${nama}\nUnit: ${villa}\nCheck-in: ${tanggal}\n\nMohon info ketersediaannya. Terima kasih.`;
+            window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
